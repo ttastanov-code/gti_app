@@ -1,3 +1,21 @@
 from django.contrib import admin
+from .models import Page, Vacancy
 
-# Register your models here.
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'page_type', 'is_active', 'updated_at')
+    list_editable = ('is_active',)
+    search_fields = ('title',)
+    list_filter = ('page_type', 'is_active')
+    readonly_fields = ('created_at', 'updated_at')
+    ordering = ('page_type',)
+
+
+@admin.register(Vacancy)
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at', 'updated_at')
+    list_editable = ('is_active',)
+    search_fields = ('title',)
+    list_filter = ('is_active', 'created_at')
+    readonly_fields = ('created_at', 'updated_at')
+    ordering = ('-created_at',)

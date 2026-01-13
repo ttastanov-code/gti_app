@@ -1,4 +1,6 @@
+# ==========================
 # Python
+# ==========================
 __pycache__/
 *.py[cod]
 *.so
@@ -7,26 +9,47 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual environment
+# ==========================
+# Virtual environments
+# ==========================
 app_env/
 .venv/
+venv/
 
+# ==========================
 # Django
+# ==========================
 *.sqlite3
 db.sqlite3
 /staticfiles/
-media/         
+media/
 
+# settings.py локальные и серверные
+settings.py
+
+# Шаблон настроек (можно коммитить)
+settings.example.py
+
+# ==========================
 # Environment files
+# ==========================
 .env
 .env.production
+.env.local
+.env.dev
 
+# ==========================
 # IDE / Editor
+# ==========================
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 .DS_Store
 
-# Misc
+# ==========================
+# Logs and misc
+# ==========================
 *.log
 *.pot
 *.pyc

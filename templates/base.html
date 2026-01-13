@@ -51,7 +51,7 @@
 
 <!-- ================= SIDEBAR ================= -->
 <div class="ui vertical inverted sidebar menu">
-    <a href="{% url 'main' %}" class="item {% if request.path == '/' %}active{% endif %}">
+    <a href="{% url 'home' %}" class="item {% if request.path == '/' %}active{% endif %}">
         <i class="home icon"></i> Главная
     </a>
     <a href="#" class="item"><i class="folder icon"></i> Проекты</a>
@@ -74,12 +74,12 @@
             </a>
 
             <!-- Логотип -->
-            <a href="{% url 'main' %}" class="header item">
+            <a href="{% url 'home' %}" class="header item">
                 <img class="ui mini image" src="{% static 'logo/mini_white.png' %}">
             </a>
 
             <!-- Меню -->
-            <a href="{% url 'main' %}" class="item {% if request.path == '/' %}active{% endif %}">Главная</a>
+            <a href="{% url 'home' %}" class="item {% if request.path == '/' %}active{% endif %}">Главная</a>
             <a href="#" class="item">Проекты</a>
             <a href="#" class="item">Новости</a>
             <a href="#" class="item">О компании</a>

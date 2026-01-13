@@ -44,27 +44,22 @@ INSTALLED_APPS = [
     
     #apps
     'main',
-    # 'article',
-    # 'project',
-    # 'info',
-    # 'request',
+    'article',
+    'project',
+    'info',
+    'request',
     
     'tinymce',
     'widget_tweaks',
 ]
 
 #TinyMCE config
-{
-    "theme": "silver",
-    "height": 500,
-    "menubar": False,
-    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
-    "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
-    "code,help,wordcount",
-    "toolbar": "undo redo | formatselect | "
-    "bold italic backcolor | alignleft aligncenter "
-    "alignright alignjustify | bullist numlist outdent indent | "
-    "removeformat | help",
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': 800,
+    'menubar': True,
+    'plugins': 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+    'toolbar': 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
 }
 
 MIDDLEWARE = [
@@ -115,10 +110,10 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'gti_app',
 #         'USER': 'gti_app',
-#         'PASSWORD': '123',
-#         'HOST': 'localhost',
+#         'PASSWORD': 's3A7kKh4LKzmLZjG',
+#         'HOST': '127.0.0.1',
 #         'PORT': 3306,
-#         'OPTIONS': {'charset': 'utf8mb4'},
+#         'OPTIONS': {'charset': 'utf8'},
 #      }
 # }
 
@@ -172,3 +167,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # EMAIL_HOST_PASSWORD = '123'
 # EMAIL_USE_TLS = True
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_REDIRECT_URL = '/'  # куда пойти после входа
+LOGOUT_REDIRECT_URL = '/'     # куда пойти после выхода
