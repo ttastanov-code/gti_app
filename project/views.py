@@ -1,15 +1,15 @@
 from .models import Project
-from main.mixins import BaseListView, BaseDetailView
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import ProjectForm
 
-class ProjectListView(BaseListView):
+class ProjectListView(ListView):
     model = Project
     template_name = "project/project_list.html"
     context_object_name = "projects"
     ordering = "-created_at"
+    success_url = reverse_lazy("project:list")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -17,7 +17,7 @@ class ProjectListView(BaseListView):
         return context
 
 
-class ProjectDetailView(BaseDetailView):
+class ProjectDetailView(DetailView):
     model = Project
     template_name = "project/project_detail.html"
     context_object_name = "project"
@@ -43,4 +43,4 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = "project/project_create.html"
 
     def get_success_url(self):
-        return reverse_lazy("project:detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy("project:list", kwargs={"pk": self.object.pk})

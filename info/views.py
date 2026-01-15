@@ -1,13 +1,11 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView
 from .models import Page, Vacancy
-from main.mixins import BaseListView, BaseDetailView
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import VacancyForm, PageForm
 
-class VacancyListView(BaseListView):
+class VacancyListView(ListView):
     model = Vacancy
     template_name = "info/vacancy_list.html"
     context_object_name = "vacancies"
@@ -21,7 +19,7 @@ class VacancyListView(BaseListView):
         return context
 
 
-class VacancyDetailView(BaseDetailView):
+class VacancyDetailView(DetailView):
     model = Vacancy
     template_name = "info/vacancy_detail.html"
     context_object_name = "vacancy"
