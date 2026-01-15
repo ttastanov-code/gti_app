@@ -7,25 +7,28 @@
   <div class="hero bg-black text-neutral-content min-h-screen">
     <div class="hero-content flex-col lg:flex-row-reverse">
       <img
-        src="{% static 'hero3.png' %}"
+        src="{% static 'hero_black.png' %}"
         class="max-w-sm rounded-lg shadow-2xl"
       />
       <div>
-        <span class="text-rotate text-3xl duration-8000">
+        <h1 class="text-3xl">ФОРМУЛА НАШЕГО БУДУЩЕГО:
+          <span class="text-rotate text-3xl duration-8000">
             <span>
-              <span class="text">МЫСЛИТЬ</span>
-              <span class="text">ПРОЕКТИРОВАТЬ</span>
-              <span class="text">РЕАЛИЗОВЫВАТЬ</span>
-              <span class="text">МЕНЯТЬ МИР</span>
+              <span class="text bg-white text-black px-2">МЫСЛИТЬ</span>
+              <span class="text bg-white text-black px-2">ПРОЕКТИРОВАТЬ</span>
+              <span class="text bg-white text-black px-2">РЕАЛИЗОВЫВАТЬ</span>
+              <span class="text bg-white text-black px-2">МЕНЯТЬ МИР</span>
             </span>
-        </span>
-        <h1 class="text-3xl font-bold">Мы создаём умный город</h1>
-        <p class="py-6">
-          Мы создаём умный город, разрабатывая IT системы и электронные
+          </span>
+        </h1>
+        <p class="py-3">
+          Мы создаём умные города, разрабатывая IT системы и электронные
           устройства, которые делают город удобным, прозрачным
           и современным.
+        </p>
+        <p class="py-3">
           Наши решения помогают городам Казахстана эффективно управлять
-          общественным транспортом и улучшать работ у инфраструктуры.
+          общественным транспортом и улучшать работу инфраструктуры.
         </p>
         <a href="{% url 'project:list' %}">
           <button class="btn btn-primary">Наши проекты</button>
@@ -81,9 +84,6 @@
           <a href="{% url 'project:detail' project.pk %}"
             class="rounded-xl bg-neutral-focus p-4 hover:scale-[1.02] transition">
             <h3 class="font-semibold text-lg">{{ project.name }}</h3>
-            <p class="text-sm opacity-70">
-              {{ project.description|truncatechars:60|safe }}
-            </p>
           </a>
           {% endfor %}
         </div>
@@ -99,6 +99,22 @@
           <div class="p-6 rounded-xl bg-base-200 hover:bg-base-300 transition overflow-hidden">
             <h3 class="text-xl font-semibold mb-2">
               {{ block.title }}
+              {% if user.is_authenticated %}
+                <a href="{% url 'main:block_edit' block.pk %}"
+                  class="btn btn-ghost btn-xs gap-1">
+                  <!-- pencil-square -->
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.313l-4.5 1.125
+                            1.125-4.5L16.862 3.487z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19.5 12v6.75A2.25 2.25 0 0117.25 21H5.25A2.25 2.25 0 013 18.75V6.75
+                            A2.25 2.25 0 015.25 4.5H12"/>
+                  </svg>
+                </a>
+              {% endif %}
             </h3>
 
             <div class="
@@ -116,6 +132,19 @@
         </div>
       </div>
     </div>
-
+    {% if user.is_authenticated %}
+      <div class="flex justify-between items-center m-3">
+        <a href="{% url 'main:block_create' %}"
+          class="btn btn-primary btn-sm gap-2">
+          <!-- plus -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 4v16m8-8H4"/>
+          </svg>
+          Добавить блок
+        </a>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

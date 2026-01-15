@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Создание блока{% endblock %}
+
+{% block content %}
+{{ form.media }}
+
+<div class="max-w-4xl mx-auto py-16 px-4">
+  <h1 class="text-3xl font-bold mb-8">Создание блока</h1>
+
+  <form method="post" class="card bg-base-100 shadow-xl p-8 space-y-6">
+    {% csrf_token %}
+
+    <div class="form-control">
+      <label class="label"><span class="label-text">Заголовок</span></label>
+      {{ form.title|add_class:"input input-bordered w-full" }}
+    </div>
+
+    <div class="form-control">
+      <label class="label"><span class="label-text">Порядок</span></label>
+      {{ form.order|add_class:"input input-bordered w-full" }}
+    </div>
+
+    <div class="form-control">
+      <label class="label"><span class="label-text">Содержимое</span></label>
+      {{ form.content }}
+    </div>
+
+    <div class="form-control">
+      <label class="label cursor-pointer gap-3">
+        {{ form.is_active|add_class:"toggle toggle-primary" }}
+        <span class="label-text">Активен</span>
+      </label>
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" class="btn btn-primary gap-2">
+        <!-- check -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 13l4 4L19 7"/>
+        </svg>
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
