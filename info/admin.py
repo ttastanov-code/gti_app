@@ -9,6 +9,14 @@ class PageAdmin(admin.ModelAdmin):
     list_filter = ('page_type', 'is_active')
     readonly_fields = ('created_at', 'updated_at')
     ordering = ('page_type',)
+    fieldsets = (
+        ("Основное", {
+            "fields": ("page_type", "title", "is_active")
+        }),
+        ("Контент", {
+            "fields": ("content",),
+        }),
+    )
 
 
 @admin.register(Vacancy)

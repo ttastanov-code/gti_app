@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+  <div class="max-w-6xl mx-auto py-16 px-4">
+
+    <!-- Заголовок + кнопка добавления -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
+      <div>
+        <h1 class="text-4xl font-bold mb-2">{{ page_title }}</h1>
+        <p class="text-base-content/60">
+          Актуальные новости и статьи компании
+        </p>
+      </div>
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'article:create' %}"
+        class="btn btn-primary gap-2 self-start md:self-auto">
+        <!-- plus -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4v16m8-8H4"/>
+        </svg>
+        Добавить статью
+      </a>
+      {% endif %}
+    </div>
+
+    <!-- Редакционная лента -->
+    <div class="space-y-12">
+
+      {% for article in articles %}
+      <a href="{% url 'article:detail' article.pk %}"
+        class="group block">
+
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+
+          {% if article.image %}
+          <img src="{{ article.image.url }}"
+              alt="{{ article.title }}"
+              class="w-full md:w-72 h-48 object-cover rounded-2xl shadow
+                      group-hover:scale-[1.02] transition">
+          {% endif %}
+
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold mb-2 group-hover:underline">
+              {{ article.title }}
+            </h2>
+
+            <p class="text-sm text-base-content/60 mb-4 flex items-center gap-2">
+              <!-- calendar -->
+              <svg xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3M5 11h14M5 19h14"/>
+              </svg>
+              {{ article.published_at|date:"d M Y" }}
+            </p>
+
+            <p class="text-base-content/80 leading-relaxed">
+              {{ article.content|striptags|truncatechars:180 }}
+            </p>
+
+            <div class="mt-4 text-primary font-semibold">
+              Читать →
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Разделитель между статьями -->
+        {% if not forloop.last %}
+        <div class="mt-12 border-b border-base-300"></div>
+        {% endif %}
+
+      </a>
+      {% endfor %}
+
+    </div>
+
+  </div>
+{% endblock %}

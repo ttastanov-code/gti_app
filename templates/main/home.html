@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Guidejet TI: Мы создаём умный город{% endblock %}
+
+{% block content %}
+  <div class="hero bg-black text-neutral-content min-h-screen">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <img
+        src="{% static 'hero3.png' %}"
+        class="max-w-sm rounded-lg shadow-2xl"
+      />
+      <div>
+        <span class="text-rotate text-3xl duration-8000">
+            <span>
+              <span class="text">МЫСЛИТЬ</span>
+              <span class="text">ПРОЕКТИРОВАТЬ</span>
+              <span class="text">РЕАЛИЗОВЫВАТЬ</span>
+              <span class="text">МЕНЯТЬ МИР</span>
+            </span>
+        </span>
+        <h1 class="text-3xl font-bold">Мы создаём умный город</h1>
+        <p class="py-6">
+          Мы создаём умный город, разрабатывая IT системы и электронные
+          устройства, которые делают город удобным, прозрачным
+          и современным.
+          Наши решения помогают городам Казахстана эффективно управлять
+          общественным транспортом и улучшать работ у инфраструктуры.
+        </p>
+        <a href="{% url 'project:list' %}">
+          <button class="btn btn-primary">Наши проекты</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="grid gap-6 max-w-7xl mx-auto py-12 grid-cols-1 md:grid-cols-3 md:grid-flow-row">
+    <!-- Articles -->
+    <div class="md:col-span-1 card bg-base-100 shadow-xl h-fit self-start">
+
+      <div class="card-body">
+        <h2 class="text-2xl font-bold">Последние статьи</h2>
+
+        <div class="space-y-5">
+          {% for article in articles %}
+          <a href="{% url 'article:detail' article.pk %}"
+            class="group flex gap-4 p-4 rounded-xl hover:bg-base-200 transition">
+
+            {% if article.image %}
+            <img src="{{ article.image.url }}"
+                class="w-24 h-24 object-cover rounded-lg shrink-0">
+            {% endif %}
+
+            <div>
+              <h3 class="font-semibold text-lg group-hover:underline">
+                {{ article.title }}
+              </h3>
+              <p class="text-sm text-base-content/60">
+                {{ article.published_at|date:"d M Y" }}
+              </p>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+
+        <div class="card-actions justify-end">
+          <a href="{% url 'article:list' %}" class="btn btn-outline btn-sm">
+            Все статьи →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="md:col-span-2 card bg-neutral text-neutral-content shadow-xl h-fit self-start">
+
+      <div class="card-body">
+        <h2 class="text-2xl font-bold">Проекты</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for project in projects %}
+          <a href="{% url 'project:detail' project.pk %}"
+            class="rounded-xl bg-neutral-focus p-4 hover:scale-[1.02] transition">
+            <h3 class="font-semibold text-lg">{{ project.name }}</h3>
+            <p class="text-sm opacity-70">
+              {{ project.description|truncatechars:60|safe }}
+            </p>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Blocks -->
+    <div class="md:col-span-3 card bg-base-100 shadow-xl overflow-hidden">
+      <div class="card-body">
+
+        <div class="space-y-6">
+          {% for block in blocks %}
+          <div class="p-6 rounded-xl bg-base-200 hover:bg-base-300 transition overflow-hidden">
+            <h3 class="text-xl font-semibold mb-2">
+              {{ block.title }}
+            </h3>
+
+            <div class="
+                prose max-w-none
+                prose-img:max-w-full
+                prose-img:h-auto
+                prose-table:block
+                prose-table:overflow-x-auto
+                break-words
+            ">
+              {{ block.content|safe }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

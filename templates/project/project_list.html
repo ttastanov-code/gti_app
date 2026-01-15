@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+  <div class="max-w-7xl mx-auto py-16 px-4">
+
+    <!-- Заголовок -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6">
+      <div>
+        <h1 class="text-4xl font-bold mb-2">{{ page_title }}</h1>
+        <p class="text-base-content/60">
+          Наши ключевые проекты и разработки
+        </p>
+      </div>
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'project:create' %}"
+        class="btn btn-primary gap-2 self-start md:self-auto">
+        <!-- plus -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 4v16m8-8H4"/>
+        </svg>
+        Создать проект
+      </a>
+      {% endif %}
+    </div>
+
+    {% for project in projects %}
+      {% if forloop.first %}
+        <!-- Флагманский проект -->
+        <a href="{% url 'project:detail' project.pk %}"
+          class="group relative block rounded-3xl overflow-hidden mb-16 shadow-2xl">
+
+          {% if project.image %}
+          <img src="{{ project.image.url }}"
+              alt="{{ project.name }}"
+              class="w-full h-[60vh] object-cover group-hover:scale-105 transition duration-500">
+          {% endif %}
+
+          <!-- Градиент -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+          <!-- Контент -->
+          <div class="absolute bottom-0 left-0 p-10 text-white max-w-2xl">
+            <h2 class="text-4xl font-bold mb-4">
+              {{ project.name }}
+            </h2>
+
+            {% if project.description %}
+            <p class="text-lg opacity-90 mb-6">
+              {{ project.description|truncatechars:180|safe }}
+            </p>
+            {% endif %}
+
+            <span class="btn btn-primary gap-2 m-2">
+              Открыть проект →
+            </span>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Остальные проекты -->
+    <div class="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {% for project in projects %}
+        {% if not forloop.first %}
+        <a href="{% url 'project:detail' project.pk %}"
+          class="group card bg-base-100 shadow-xl hover:shadow-2xl transition">
+
+          {% if project.image %}
+          <figure class="overflow-hidden">
+            <img src="{{ project.image.url }}"
+                alt="{{ project.name }}"
+                class="h-64 w-full object-cover group-hover:scale-105 transition duration-300">
+          </figure>
+          {% endif %}
+
+          <div class="card-body">
+            <h2 class="card-title text-xl group-hover:underline">
+              {{ project.name }}
+            </h2>
+
+            {% if project.description %}
+            <p class="text-sm text-base-content/70">
+              {{ project.description|truncatechars:120|safe }}
+            </p>
+            {% endif %}
+
+            <div class="card-actions justify-end">
+              <span class="btn btn-ghost btn-sm">
+                Подробнее →
+              </span>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}

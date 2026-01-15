@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Связаться с нами{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-16 px-4">
+
+  <!-- Заголовок -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold mb-4">Связаться с нами</h1>
+    <p class="text-base-content/60">
+      Оставьте заявку, и мы свяжемся с вами в ближайшее время
+    </p>
+  </div>
+
+  <!-- Сообщения -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} mb-6 shadow">
+        <span>{{ message }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Карточка формы -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body space-y-6">
+
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+        {{ form.website }}  {# honeypot поле, можно скрыть стилями #}
+
+        <!-- Имя -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Имя</span>
+          </label>
+          {{ form.name|add_class:"input input-bordered w-full" }}
+        </div>
+
+        <!-- Email -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Email</span>
+          </label>
+          {{ form.email|add_class:"input input-bordered w-full" }}
+        </div>
+
+        <!-- Телефон -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Телефон</span>
+          </label>
+          {{ form.phone|add_class:"input input-bordered w-full" }}
+        </div>
+
+        <!-- Сообщение -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Сообщение</span>
+          </label>
+          {{ form.message|add_class:"textarea textarea-bordered w-full h-32" }}
+        </div>
+
+        <!-- Кнопка -->
+        <div class="pt-4">
+          <button type="submit"
+                  class="btn btn-primary w-full gap-2">
+            <!-- Иконка отправки -->
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-4 w-4"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 10l9-6 9 6-9 6-9-6zm0 0v8l9 6 9-6v-8" />
+            </svg>
+            Отправить заявку
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}

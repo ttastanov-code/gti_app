@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+{{ form.media }}
+
+    <div class="max-w-4xl mx-auto py-16 px-4">
+
+        <div class="flex items-center gap-3 mb-8">
+            <h1 class="text-3xl font-bold">{{ title }}</h1>
+        </div>
+
+        <form method="post" class="card bg-base-100 shadow-xl p-8 space-y-6">
+            {% csrf_token %}
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Должность</span></label>
+                {{ form.title|add_class:"input input-bordered w-full" }}
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Описание</span></label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Требования</span></label>
+                {{ form.requirements }}
+            </div>
+
+            <div class="form-control">
+                <label class="label"><span class="label-text font-semibold">Обязанности</span></label>
+                {{ form.responsibilities }}
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer gap-3 justify-start">
+                    {{ form.is_active|add_class:"toggle toggle-primary" }}
+                    <span class="label-text">Активная вакансия</span>
+                </label>
+            </div>
+
+            <div class="flex justify-between pt-6 border-t">
+
+                <a href="{% url 'info:vacancy_list' %}"
+                    class="btn btn-ghost gap-2">
+                    <!-- arrow-left -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Назад
+                </a>
+
+                <button type="submit" class="btn btn-primary gap-2">
+                    <!-- check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Сохранить
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

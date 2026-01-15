@@ -15,8 +15,8 @@ class Page(models.Model):
     is_active = models.BooleanField("Активна", default=True)
 
     class Meta:
-        verbose_name = "Страница"
-        verbose_name_plural = "Страницы"
+        verbose_name = "Page"
+        verbose_name_plural = "Pages"
 
     def __str__(self):
         return self.title

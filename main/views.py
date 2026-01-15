@@ -1,11 +1,16 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from project.models import Project
+from django.views.generic import TemplateView
+from .models import HomeBlock
 from article.models import Article
-from main.models import HomeBlock
+from project.models import Project
 
-def index(request):
-    projects = Project.objects.all().order_by('-created_at')[:5]
-    articles = Article.objects.filter(is_published=True).order_by('-published_at')[:5]
-    blocks = HomeBlock.objects.filter(is_active=True).order_by('order')
-    return render(request, 'main/index.html', {'projects': projects, 'articles': articles, 'blocks': blocks})
+
+class HomeView(TemplateView):
+    template_name = "main/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["blocks"] = HomeBlock.objects.filter(is_active=True)
+        context["articles"] = Article.objects.order_by("-published_at").filter(is_published=True)[:3]
+        context["projects"] = Project.objects.order_by("-created_at").all()[:6]
+        context["page_title"] = "Главная"
+        return context
