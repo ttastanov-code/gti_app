@@ -54,14 +54,16 @@
 <div class="grid gap-3 md:gap-6 max-w-7xl mx-auto py-4 md:py-12 grid-cols-1 md:grid-cols-3">
 
   <!-- ARTICLES -->
-  <div class="md:col-span-1 bg-transparent md:bg-base-100 shadow-none md:shadow-xl rounded-none md:rounded-xl">
+  <div class="md:col-span-1 bg-base-300 md:bg-base-100 shadow-none md:shadow-xl rounded-none md:rounded-xl">
     <div class="p-2 md:p-6">
       <h2 class="text-xl md:text-2xl font-bold mb-3">Последние статьи</h2>
 
       <div class="space-y-3">
         {% for article in articles %}
         <a href="{% url 'article:detail' article.pk %}"
-           class="flex gap-3 p-2 md:p-4 rounded-lg hover:bg-base-200 transition">
+           class="flex gap-3 p-2 md:p-4 rounded-lg hover:bg-base-200 transition-all duration-300
+                  md:hover:bg-neutral-focus/70
+                  md:hover:scale-[1.06]">
 
           {% if article.image %}
           <img src="{{ article.image.url }}"
@@ -72,6 +74,9 @@
             <h3 class="font-semibold text-sm md:text-lg">
               {{ article.title }}
             </h3>
+            <p class="text-xs">
+              {{ article.content|striptags|truncatechars:80|safe }}
+            </p>
             <p class="text-xs md:text-sm text-base-content/60">
               {{ article.published_at|date:"d M Y" }}
             </p>
@@ -113,22 +118,24 @@
                   bg-neutral-focus/30 md:bg-neutral-focus/40
                   transition-all duration-300
                   md:hover:bg-neutral-focus/70
-                  md:hover:scale-[1.01]">
+                  md:hover:scale-[1.06]">
 
           {% if project.image %}
           <img src="{{ project.image.url }}"
               class="w-18 h-12 md:w-28 md:h-22 object-cover rounded-lg shrink-0
+                      shadow-lg md:shadow-2xl
                       transition duration-300
-                      md:group-hover/item:scale-105 ">
+                      md:group-hover/item:scale-105
+                      md:group-hover/item:drop-shadow-[0_0_10px_rgba(59,130,246,0.35)]">
           {% endif %}
 
           <div>
             <h3 class="font-semibold text-sm md:text-base md:group-hover">
               {{ project.name }}
             </h3>
-            {% if project.short_description %}
-            <p class="text-xs md:text-sm text-neutral-content/60">
-              {{ project.short_description|truncatechars:45 }}
+            {% if project.description %}
+            <p class="text-xs text-neutral-content/60">
+              {{ project.description|striptags|truncatechars:80|safe }}
             </p>
             {% endif %}
           </div>
@@ -172,7 +179,7 @@
       <!-- Steps -->
       <ul class="steps steps-vertical lg:steps-horizontal w-full gap-4">
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -186,7 +193,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -200,7 +207,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -214,7 +221,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -228,7 +235,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -242,7 +249,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1
@@ -256,7 +263,7 @@
           </div>
         </li>
 
-        <li class="step step-primary">
+        <li class="step step-success">
           <div class="ml-4 lg:ml-0 text-left lg:text-center">
             <div class="flex flex-col gap-1 transition-all duration-300
                         lg:hover:-translate-y-1

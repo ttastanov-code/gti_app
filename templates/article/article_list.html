@@ -62,7 +62,7 @@
             </p>
 
             <p class="text-base-content/80 leading-relaxed">
-              {{ article.content|striptags|truncatechars:180 }}
+              {{ article.content|striptags|truncatechars:180|safe }}
             </p>
 
             <div class="mt-4 text-primary font-semibold">
