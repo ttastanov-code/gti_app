@@ -27,7 +27,7 @@
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body space-y-6">
 
-      <form method="post" class="space-y-6">
+      <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
         {{ form.website }}  {# honeypot поле, можно скрыть стилями #}
 
@@ -63,18 +63,26 @@
           {{ form.message|add_class:"textarea textarea-bordered w-full h-32" }}
         </div>
 
+        <!-- Файл -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">
+              Файл до 50 МБ 
+            </span>
+          </label>
+          {{ form.file|add_class:"file-input file-input-bordered w-full" }}
+        </div>
+
         <!-- Кнопка -->
         <div class="pt-4">
           <button type="submit"
                   class="btn btn-primary w-full gap-2">
             <!-- Иконка отправки -->
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="h-4 w-4"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 10l9-6 9 6-9 6-9-6zm0 0v8l9 6 9-6v-8" />
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-5 h-5">
+              <path d="M3.105 2.289a.75.75 0 01.81-.07l13.5 6.75a.75.75 0 010 1.342l-13.5 6.75a.75.75 0 01-1.065-.81l1.68-5.881L9 10 4.53 9.63l-1.68-5.88a.75.75 0 01.255-.761z"/>
             </svg>
             Отправить заявку
           </button>

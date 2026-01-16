@@ -2,6 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+
+admin.site.site_header = "GTI WebApp Admin"
+admin.site.site_title = "GTI WebApp Admin"
+admin.site.index_title = "Панель управления"
 
 urlpatterns = [
     path(r'jet/', include('jet.urls', 'jet')),
