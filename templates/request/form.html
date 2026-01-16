@@ -8,7 +8,7 @@
 
   <!-- Заголовок -->
   <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold mb-4">Связаться с нами</h1>
+    <h1 class="text-4xl font-semibold mb-3">Связаться с нами</h1>
     <p class="text-base-content/60">
       Оставьте заявку, и мы свяжемся с вами в ближайшее время
     </p>
@@ -23,74 +23,72 @@
     {% endfor %}
   {% endif %}
 
-  <!-- Карточка формы -->
-  <div class="card bg-base-100 shadow-xl">
-    <div class="card-body space-y-6">
+  <!-- Форма -->
+  <div class="bg-base-100 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-6 md:p-10">
 
-      <form method="post" enctype="multipart/form-data" class="space-y-6">
-        {% csrf_token %}
-        {{ form.website }}  {# honeypot поле, можно скрыть стилями #}
+    <form method="post" enctype="multipart/form-data" class="space-y-8">
+      {% csrf_token %}
+      {{ form.website }}
 
-        <!-- Имя -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text font-semibold">Имя</span>
-          </label>
-          {{ form.name|add_class:"input input-bordered w-full" }}
-        </div>
+      <!-- Имя -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Имя</label>
+        {{ form.name|add_class:"w-full px-4 py-3 rounded-xl border border-base-300 bg-transparent focus:outline-none focus:border-primary transition" }}
+        <p class="text-xs text-base-content/40 mt-1">
+          Например: Иван Иванов
+        </p>
+      </div>
 
-        <!-- Email -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text font-semibold">Email</span>
-          </label>
-          {{ form.email|add_class:"input input-bordered w-full" }}
-        </div>
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        {{ form.email|add_class:"w-full px-4 py-3 rounded-xl border border-base-300 bg-transparent focus:outline-none focus:border-primary transition" }}
+        <p class="text-xs text-base-content/40 mt-1">
+          Например: example@email.com
+        </p>
+      </div>
 
-        <!-- Телефон -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text font-semibold">Телефон</span>
-          </label>
-          {{ form.phone|add_class:"input input-bordered w-full" }}
-        </div>
+      <!-- Телефон -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Телефон</label>
+        {{ form.phone|add_class:"w-full px-4 py-3 rounded-xl border border-base-300 bg-transparent focus:outline-none focus:border-primary transition" }}
+        <p class="text-xs text-base-content/40 mt-1">
+          Формат: +7 777 123 45 67
+        </p>
+      </div>
 
-        <!-- Сообщение -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text font-semibold">Сообщение</span>
-          </label>
-          {{ form.message|add_class:"textarea textarea-bordered w-full h-32" }}
-        </div>
+      <!-- Сообщение -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Сообщение</label>
+        {{ form.message|add_class:"w-full px-4 py-3 rounded-xl border border-base-300 bg-transparent h-36 resize-none focus:outline-none focus:border-primary transition" }}
+        <p class="text-xs text-base-content/40 mt-1">
+          Коротко опишите вашу задачу или идею проекта
+        </p>
+      </div>
 
-        <!-- Файл -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text font-semibold">
-              Файл до 50 МБ 
-            </span>
-          </label>
-          {{ form.file|add_class:"file-input file-input-bordered w-full" }}
-        </div>
+      <!-- Файл -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Файл (до 50 МБ)</label>
+        {{ form.file|add_class:"w-full px-4 py-2 rounded-xl border border-base-300 bg-transparent focus:outline-none focus:border-primary transition" }}
+        <p class="text-xs text-base-content/40 mt-1">
+          PDF, DOCX, PNG, JPG и тд.
+        </p>
+      </div>
 
-        <!-- Кнопка -->
-        <div class="pt-4">
-          <button type="submit"
-                  class="btn btn-primary w-full gap-2">
-            <!-- Иконка отправки -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="w-5 h-5">
-              <path d="M3.105 2.289a.75.75 0 01.81-.07l13.5 6.75a.75.75 0 010 1.342l-13.5 6.75a.75.75 0 01-1.065-.81l1.68-5.881L9 10 4.53 9.63l-1.68-5.88a.75.75 0 01.255-.761z"/>
-            </svg>
-            Отправить заявку
-          </button>
-        </div>
+      <!-- Кнопка -->
+      <div class="pt-6">
+        <button type="submit"
+                class="w-full py-3 rounded bg-primary text-primary-content
+                       font-medium tracking-wide
+                       transition-all duration-300
+                       hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]
+                       hover:scale-[1.01]
+                       active:scale-[0.99]">
+          Отправить заявку
+        </button>
+      </div>
 
-      </form>
-
-    </div>
+    </form>
   </div>
 
 </div>
