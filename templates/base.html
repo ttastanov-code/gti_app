@@ -31,45 +31,44 @@
                         <li><a href="{% url 'project:list' %}">Проекты</a></li>
                         <li><a href="{% url 'article:list' %}">Новости</a></li>
                         <li><a href="{% url 'info:page' 'about' %}">О компании</a></li>
-                        {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'main:logout' %}" class="inline">
-                                {% csrf_token %}
-                                <button type="submit"
-                                    class="m-3 btn btn-outline btn-xs gap-2">
-
-                                    <!-- Иконка выхода -->
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="h-4 w-4"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h6a2 2 0 012 2v1"/>
-                                    </svg>
-
-                                    Выйти
-                                </button>
-                            </form>
-                        {% else %}
-                            <!-- Войти -->
-                            <a href="{% url 'main:login' %}"
-                            class="m-3 btn btn-outline btn-xs gap-2">
-                                <!-- Иконка входа -->
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5m0 0l-5-5m5 5H3"/>
-                                </svg>
-                                Войти
-                            </a>
-                        {% endif %}
                     </ul>
                 </div>
-                <a href="{% url 'main:home' %}" class="btn btn-ghost text-xl mx-5">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'main:logout' %}" class="inline lg:hidden">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="m-3 btn btn-outline btn-xs gap-2">
+
+                            <!-- Иконка выхода -->
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h6a2 2 0 012 2v1"/>
+                            </svg>
+                        </button>
+                    </form>
+                {% else %}
+                    <!-- Войти -->
+                    <a href="{% url 'main:login' %}"
+                    class="m-3 btn btn-outline btn-xs gap-2">
+                        <!-- Иконка входа -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5m0 0l-5-5m5 5H3"/>
+                        </svg>
+                    </a>
+                {% endif %}
+
+                <a href="{% url 'main:home' %}" class="btn btn-ghost text-xl mx-5 flex items-center gap-2">
                     <img class="ui centered image" src="{% static 'logo/mini.png' %}" width="35">
-                    Guidejet TI
+                    <span class="hidden md:inline">Guidejet TI</span>
                 </a>
+
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal px-1">
@@ -85,7 +84,7 @@
 
                     <!-- Связаться с нами -->
                     <a href="{% url 'request:form' %}"
-                    class="lg:hidden m-3 btn btn-outline btn-primary btn-xs gap-2">
+                    class="lg:hidden m-3 btn btn-primary btn-outline gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -95,7 +94,7 @@
                     </a>
 
                     <a href="{% url 'request:form' %}"
-                    class="hidden lg:flex m-3 btn btn-outline btn-primary btn-xs gap-2">
+                    class="hidden lg:flex m-3 btn btn-outline btn-primary btn-base gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -109,7 +108,7 @@
                         <form method="post" action="{% url 'main:logout' %}" class="inline">
                             {% csrf_token %}
                             <button type="submit"
-                                class="hidden lg:flex m-3 btn btn-outline btn-xs gap-2">
+                                class="hidden lg:flex m-3 btn btn-outline btn-base gap-2">
 
                                 <!-- Иконка выхода -->
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -120,14 +119,12 @@
                                         stroke-width="2"
                                         d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h6a2 2 0 012 2v1"/>
                                 </svg>
-
-                                Выйти
                             </button>
                         </form>
                     {% else %}
                         <!-- Войти -->
                         <a href="{% url 'main:login' %}"
-                        class="hidden lg:flex m-3 btn btn-outline btn-xs gap-2">
+                        class="hidden lg:flex m-3 btn btn-outline btn-base gap-2">
                             <!-- Иконка входа -->
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="h-4 w-4"
@@ -135,7 +132,6 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5m0 0l-5-5m5 5H3"/>
                             </svg>
-                            Войти
                         </a>
                     {% endif %}
                 </div>
