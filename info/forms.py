@@ -1,18 +1,37 @@
-# info/forms.py
 from django import forms
 from tinymce.widgets import TinyMCE
 from .models import Page, Vacancy
 
 class PageForm(forms.ModelForm):
     content = forms.CharField(
-        widget=TinyMCE(attrs={'cols': 80, 'rows': 20}),
+        widget=TinyMCE(attrs={"cols": 80, "rows": 20}),
         label="Содержимое страницы"
+    )
+
+    seo_description = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 3}),
+        label="SEO Description",
+        required=False
     )
 
     class Meta:
         model = Page
-        fields = ['page_type', 'title', 'content', 'is_active']
+        fields = [
+            "page_type",
+            "title",
+            "content",
+            "is_active",
 
+            # SEO
+            "seo_title",
+            "seo_description",
+            "seo_keywords",
+        ]
+        widgets = {
+            "seo_keywords": forms.TextInput(
+                attrs={"placeholder": "о нас, gti, компания, автоматизация"}
+            ),
+        }
 
 class VacancyForm(forms.ModelForm):
     description = forms.CharField(

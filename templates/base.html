@@ -7,7 +7,30 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{% endblock %}</title>
+
+        <!-- SEO -->
+        <title>
+            {% if seo_title %}
+                {{ seo_title }}
+            {% elif page_title %}
+                {{ page_title }}
+            {% else %}
+                {% block title %}Guidejet TI{% endblock %}
+            {% endif %}
+        </title>
+
+        <meta name="description"
+            content="{% if seo_description %}{{ seo_description }}{% else %}Guidejet TI – цифровые решения и информационные системы для города{% endif %}">
+
+        <meta name="keywords"
+            content="{% if seo_keywords %}{{ seo_keywords }}{% else %}Guidejet TI, IT, цифровые решения, Алматы{% endif %}">
+
+        <!-- OpenGraph для соцсетей -->
+        <meta property="og:title"
+            content="{% if seo_title %}{{ seo_title }}{% elif page_title %}{{ page_title }}{% else %}Guidejet TI{% endif %}">
+        <meta property="og:description"
+            content="{% if seo_description %}{{ seo_description }}{% else %}Guidejet TI – цифровые решения и информационные системы для города{% endif %}">
+
         <!-- Tailwind + daisyUI -->
         <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>

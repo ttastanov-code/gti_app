@@ -1,8 +1,6 @@
 from django import forms
 from .models import Request
 
-
-# request/forms.py
 class RequestForm(forms.ModelForm):
     website = forms.CharField(required=False, widget=forms.HiddenInput)
 

@@ -5,72 +5,101 @@
 {% block content %}
 {{ form.media }}
 
-    <div class="max-w-4xl mx-auto py-16 px-4">
+<div class="max-w-4xl mx-auto py-16 px-4">
 
-        <div class="flex items-center gap-3 mb-8">
-            <!-- pencil-square -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-8 text-primary"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="flex items-center gap-3 mb-8">
+        <!-- pencil-square -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-8 w-8 text-primary"
+             fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.313l-4.5 1.125
-                    1.125-4.5L16.862 3.487z"/>
+                  d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.313l-4.5 1.125
+                  1.125-4.5L16.862 3.487z"/>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19.5 12v6.75A2.25 2.25 0 0117.25 21H5.25A2.25 2.25 0 013 18.75V6.75
-                    A2.25 2.25 0 015.25 4.5H12"/>
-            </svg>
-            <h1 class="text-3xl font-bold">Редактирование страницы</h1>
+                  d="M19.5 12v6.75A2.25 2.25 0 0117.25 21H5.25A2.25 2.25 0 013 18.75V6.75
+                  A2.25 2.25 0 015.25 4.5H12"/>
+        </svg>
+        <h1 class="text-3xl font-bold">Редактирование страницы</h1>
+    </div>
+
+    <form method="post"
+          class="card bg-base-100 shadow-xl p-8 space-y-6">
+        {% csrf_token %}
+
+        <!-- Тип страницы -->
+        <div class="form-control">
+            <label class="label"><span class="label-text font-semibold">Тип страницы</span></label>
+            {{ form.page_type|add_class:"select select-bordered w-full" }}
         </div>
 
-        <form method="post"
-                class="card bg-base-100 shadow-xl p-8 space-y-6">
-            {% csrf_token %}
+        <!-- Заголовок -->
+        <div class="form-control">
+            <label class="label"><span class="label-text font-semibold">Заголовок</span></label>
+            {{ form.title|add_class:"input input-bordered w-full" }}
+        </div>
 
-            <div class="form-control">
-                <label class="label"><span class="label-text">Тип страницы</span></label>
-                {{ form.page_type|add_class:"select select-bordered w-full" }}
-            </div>
+        <!-- Контент -->
+        <div class="form-control">
+            <label class="label"><span class="label-text font-semibold">Контент</span></label>
+            {{ form.content }}
+        </div>
 
-            <div class="form-control">
-                <label class="label"><span class="label-text">Заголовок</span></label>
-                {{ form.title|add_class:"input input-bordered w-full" }}
-            </div>
+        <!-- Активна -->
+        <div class="form-control">
+            <label class="label cursor-pointer gap-3 justify-start">
+                {{ form.is_active|add_class:"toggle toggle-primary" }}
+                <span class="label-text">Активна</span>
+            </label>
+        </div>
 
-            <div class="form-control">
-                <label class="label"><span class="label-text">Контент</span></label>
-                {{ form.content }}
-            </div>
+        <!-- SEO БЛОК -->
+        <div class="divider pt-6">SEO</div>
 
-            <div class="form-control">
-                <label class="label cursor-pointer gap-3 justify-start">
-                    {{ form.is_active|add_class:"toggle toggle-primary" }}
-                    <span class="label-text">Активна</span>
-                </label>
-            </div>
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text font-semibold">SEO заголовок страницы</span>
+            </label>
+            {{ form.seo_title|add_class:"input input-bordered w-full" }}
+        </div>
 
-            <div class="flex justify-between pt-6 border-t">
-                <a href="{% url 'info:page' object.page_type %}"
-                    class="btn btn-ghost gap-2">
-                    <!-- arrow-left -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text font-semibold">SEO описание страницы</span>
+            </label>
+            {{ form.seo_description|add_class:"textarea textarea-bordered w-full" }}
+        </div>
+
+        <div class="form-control">
+            <label class="label">
+                <span class="label-text font-semibold">SEO ключевые слова (через запятую)</span>
+            </label>
+            {{ form.seo_keywords|add_class:"input input-bordered w-full" }}
+        </div>
+
+        <!-- Кнопки -->
+        <div class="flex justify-between pt-6 border-t">
+            <a href="{% url 'info:page' object.page_type %}"
+               class="btn btn-ghost gap-2">
+                <!-- arrow-left -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 19l-7-7 7-7"/>
-                    </svg>
-                    Назад
-                </a>
+                          d="M15 19l-7-7 7-7"/>
+                </svg>
+                Назад
+            </a>
 
-                <button type="submit" class="btn btn-primary gap-2">
-                    <!-- check -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button type="submit" class="btn btn-primary gap-2">
+                <!-- check -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 13l4 4L19 7"/>
-                    </svg>
-                    Сохранить
-                </button>
-            </div>
-        </form>
+                          d="M5 13l4 4L19 7"/>
+                </svg>
+                Сохранить
+            </button>
+        </div>
+    </form>
 
-    </div>
+</div>
 {% endblock %}

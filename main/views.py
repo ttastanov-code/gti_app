@@ -6,8 +6,20 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import HomeBlock
 from .forms import HomeBlockForm
+from django.http import HttpResponse
+from django.views import View
 
 
+class RobotsTxtView(View):
+    def get(self, request):
+        content = (
+            "User-agent: *\n"
+            "Allow: /\n\n"
+            "Sitemap: https://guidejet.kz/sitemap.xml"
+        )
+        return HttpResponse(content, content_type="text/plain")
+    
+    
 class HomeBlockCreateView(LoginRequiredMixin, CreateView):
     model = HomeBlock
     form_class = HomeBlockForm

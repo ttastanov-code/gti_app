@@ -4,10 +4,10 @@
 
 {% block content %}
 {{ form.media }}
+
 <div class="max-w-4xl mx-auto py-16 px-4">
 
   <div class="flex items-center gap-3 mb-8">
-    <!-- pencil-square -->
     <svg xmlns="http://www.w3.org/2000/svg"
          class="h-8 w-8 text-primary"
          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,11 +49,33 @@
       {{ form.description }}
     </div>
 
+    <!-- SEO -->
+    <div class="divider pt-6">SEO</div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-semibold">SEO заголовок страницы</span>
+      </label>
+      {{ form.seo_title|add_class:"input input-bordered w-full" }}
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-semibold">SEO описание страницы</span>
+      </label>
+      {{ form.seo_description|add_class:"textarea textarea-bordered w-full" }}
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-semibold">SEO ключевые слова (через запятую)</span>
+      </label>
+      {{ form.seo_keywords|add_class:"input input-bordered w-full" }}
+    </div>
+
     <!-- Кнопки -->
     <div class="flex justify-between items-center pt-6 border-t">
-
-      <a href="{% url 'project:detail' object.pk %}"
-         class="btn btn-ghost gap-2">
+      <a href="{% url 'project:detail' object.pk %}" class="btn btn-ghost gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
              fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -62,8 +84,7 @@
         Назад
       </a>
 
-      <button type="submit"
-              class="btn btn-primary gap-2">
+      <button type="submit" class="btn btn-primary gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
              fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,7 +92,6 @@
         </svg>
         Сохранить
       </button>
-
     </div>
   </form>
 </div>

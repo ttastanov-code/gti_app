@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.urls import reverse
 
 class Page(models.Model):
     PAGE_TYPES = [
@@ -13,6 +14,21 @@ class Page(models.Model):
     created_at = models.DateTimeField("Создано", auto_now_add=True)
     updated_at = models.DateTimeField("Обновлено", auto_now=True)
     is_active = models.BooleanField("Активна", default=True)
+    # SEO
+    seo_title = models.CharField(
+        "SEO Title",
+        max_length=255,
+        blank=True
+    )
+    seo_description = models.TextField(
+        "SEO Description",
+        blank=True
+    )
+    seo_keywords = models.CharField(
+        "SEO Keywords",
+        max_length=500,
+        blank=True
+    )
 
     class Meta:
         verbose_name = "Page"
@@ -20,6 +36,9 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("info:page", kwargs={"page_type": self.page_type})
 
 
 class Vacancy(models.Model):

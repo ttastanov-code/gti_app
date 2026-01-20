@@ -1,4 +1,3 @@
-# request/models.py
 from django.db import models
 from tinymce.models import HTMLField
 from phonenumber_field.modelfields import PhoneNumberField

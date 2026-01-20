@@ -32,8 +32,15 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["page_title"] = self.object.title
+        obj = self.object
+
+        context["seo_title"] = obj.seo_title or obj.title
+        context["seo_description"] = obj.seo_description or obj.title
+        context["seo_keywords"] = obj.seo_keywords
+
+        context["page_title"] = obj.title
         return context
+    
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
