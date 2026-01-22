@@ -57,10 +57,10 @@
                     </ul>
                 </div>
                 {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'main:logout' %}" class="inline lg:hidden">
+                    <form method="post" action="{% url 'main:logout' %}">
                         {% csrf_token %}
                         <button type="submit"
-                            class="m-3 btn btn-outline btn-xs gap-2">
+                            class="m-3 btn btn-outline btn-xs gap-2 lg:hidden">
 
                             <!-- Иконка выхода -->
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
                 {% else %}
                     <!-- Войти -->
                     <a href="{% url 'main:login' %}"
-                    class="m-3 btn btn-outline btn-xs gap-2">
+                    class="m-3 btn btn-outline btn-xs gap-2 inline lg:hidden">
                         <!-- Иконка входа -->
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="h-4 w-4"
