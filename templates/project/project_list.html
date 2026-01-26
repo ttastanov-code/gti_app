@@ -50,7 +50,7 @@
 
             {% if project.description %}
             <p class="text-lg opacity-90 mb-6 hidden lg:flex">
-              {{ project.description|striptags|truncatechars:180 }}
+              {{ project.description|striptags|truncatechars:180|safe }}
             </p>
             {% endif %}
 
