@@ -34,8 +34,14 @@
   </div>
   {% endif %}
 
-  <div class="prose prose-lg max-w-none">
-    {{ project.description|safe }}
+  <div class="prose prose-lg max-w-none
+            [&_ul]:list-disc [&_ul]:ml-6
+            [&_ol]:list-decimal [&_ol]:ml-6
+            [&_li]:mb-1
+            [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+            [&_h2]:mt-8 [&_h2]:mb-4
+            [&_h3]:mt-6 [&_h3]:mb-3">
+      {{ project.description|safe }}
   </div>
 
 </div>
