@@ -25,20 +25,38 @@
 
     <h1 class="text-4xl font-bold mb-8">{{ vacancy.title }}</h1>
 
-    <div class="prose max-w-none mb-10">
+    <div class="prose prose-lg max-w-none
+            [&_ul]:list-disc [&_ul]:ml-6
+            [&_ol]:list-decimal [&_ol]:ml-6
+            [&_li]:mb-1
+            [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+            [&_h2]:mt-8 [&_h2]:mb-4
+            [&_h3]:mt-6 [&_h3]:mb-3">
       <h2>Описание</h2>
       {{ vacancy.description|safe }}
     </div>
 
     {% if vacancy.requirements %}
-    <div class="prose max-w-none mb-10">
+    <div class="prose prose-lg max-w-none
+            [&_ul]:list-disc [&_ul]:ml-6
+            [&_ol]:list-decimal [&_ol]:ml-6
+            [&_li]:mb-1
+            [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+            [&_h2]:mt-8 [&_h2]:mb-4
+            [&_h3]:mt-6 [&_h3]:mb-3">
       <h2>Требования</h2>
       {{ vacancy.requirements|safe }}
     </div>
     {% endif %}
 
     {% if vacancy.responsibilities %}
-    <div class="prose max-w-none">
+    <div class="prose prose-lg max-w-none
+            [&_ul]:list-disc [&_ul]:ml-6
+            [&_ol]:list-decimal [&_ol]:ml-6
+            [&_li]:mb-1
+            [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+            [&_h2]:mt-8 [&_h2]:mb-4
+            [&_h3]:mt-6 [&_h3]:mb-3">
       <h2>Обязанности</h2>
       {{ vacancy.responsibilities|safe }}
     </div>
