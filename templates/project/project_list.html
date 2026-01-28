@@ -48,11 +48,11 @@
               {{ project.name }}
             </h2>
 
-            {% if project.description %}
+            {% comment %} {% if project.description %}
             <p class="text-lg opacity-90 mb-6 hidden lg:flex">
               {{ project.description|striptags|truncatechars:180|safe }}
             </p>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
             <span class="btn btn-primary gap-2 m-2">
               Открыть проект →
@@ -82,11 +82,11 @@
               {{ project.name }}
             </h2>
 
-            {% if project.description %}
+            {% comment %} {% if project.description %}
             <p class="text-sm text-base-content/70">
               {{ project.description|striptags|truncatechars:180|safe }}
             </p>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
             <div class="card-actions justify-end">
               <span class="btn btn-ghost btn-sm">
