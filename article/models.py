@@ -1,12 +1,16 @@
 from django.db import models
 from tinymce.models import HTMLField
 from django.urls import reverse
+from django.utils import timezone
+
 
 class Article(models.Model):
     title = models.CharField("Заголовок", max_length=200)
     image = models.ImageField("Иллюстрация", upload_to="articles/")
     content = HTMLField("Текст новости или статьи")
-    published_at = models.DateTimeField(auto_now_add=True)
+    published_at = models.DateTimeField(
+    "Дата публикации",
+    default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField("Опубликовано", default=True)
     # SEO

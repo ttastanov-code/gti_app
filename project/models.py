@@ -1,13 +1,14 @@
 from django.db import models
 from tinymce.models import HTMLField
 from django.urls import reverse
+from django.utils import timezone
 
 
 class Project(models.Model):
     name = models.CharField("Название проекта", max_length=200)
     image = models.ImageField("Иллюстрация", upload_to="projects/")
     description = HTMLField("Описание проекта")
-    created_at = models.DateTimeField("Создано", auto_now_add=True)
+    created_at = models.DateTimeField("Создано", default=timezone.now)
     updated_at = models.DateTimeField("Обновлено", auto_now=True)
     # SEO
     seo_title = models.CharField(
