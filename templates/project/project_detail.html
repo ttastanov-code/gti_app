@@ -27,12 +27,12 @@
     {{ project.name }}
   </h1>
 
-  {% if project.image %}
+  {% comment %} {% if project.image %}
   <div class="mb-10">
     <img src="{{ project.image.url }}"
          class="w-full rounded-3xl shadow-xl object-cover max-h-[70vh]">
   </div>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   <div class="prose prose-lg max-w-none
             [&_ul]:list-disc [&_ul]:ml-6
