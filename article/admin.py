@@ -8,7 +8,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_editable = ("is_published",)
     search_fields = ("title",)
     list_filter = ("is_published", "published_at")
-    readonly_fields = ("published_at", "updated_at")
+    readonly_fields = ("updated_at",)
     ordering = ("-published_at",)
 
     fieldsets = (
