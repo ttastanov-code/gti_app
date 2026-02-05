@@ -72,32 +72,41 @@ class Video(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # сначала сохранить оригинал
+        # 1️⃣ сначала сохраняем оригинал, чтобы появился file.path
+        super().save(*args, **kwargs)
 
         if not self.file:
             return
 
         input_path = self.file.path
 
-        # уже оптимизирован — пропускаем
+        # 2️⃣ если уже оптимизирован — ничего не делаем
         if "_optimized" in input_path:
             return
 
         output_name = f"{uuid.uuid4()}_optimized.mp4"
-        output_path = os.path.join(os.path.dirname(input_path), output_name)
+        output_path = os.path.join(
+            os.path.dirname(input_path),
+            output_name
+        )
 
+        # 3️⃣ WEB-SAFE ffmpeg (ключевой момент)
         cmd = [
             "ffmpeg",
             "-y",
             "-i", input_path,
 
-            # 🔥 сжатие + оптимизация
-            "-vcodec", "libx264",
+            # 🎥 видео — максимально совместимый профиль
+            "-c:v", "libx264",
             "-preset", "veryfast",
             "-crf", "23",
+            "-pix_fmt", "yuv420p",
+            "-profile:v", "baseline",
+            "-level", "3.0",
             "-movflags", "+faststart",
 
-            "-acodec", "aac",
+            # 🔊 аудио
+            "-c:a", "aac",
             "-b:a", "128k",
 
             output_path
@@ -105,11 +114,13 @@ class Video(models.Model):
 
         subprocess.run(cmd, check=True)
 
-        # заменить файл на оптимизированный
+        # 4️⃣ заменяем файл на оптимизированный
         with open(output_path, "rb") as f:
             self.file.save(output_name, File(f), save=False)
 
+        # 5️⃣ чистим мусор
         os.remove(input_path)
         os.remove(output_path)
 
+        # 6️⃣ обновляем только поле file
         super().save(update_fields=["file"])
