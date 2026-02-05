@@ -56,3 +56,18 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Video(models.Model):
+    title = models.CharField("Название", max_length=255)
+    file = models.FileField("Видео", upload_to="videos/")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def url(self):
+        if self.file:
+            return self.file.url
+        return ""

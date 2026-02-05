@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Page, Vacancy
+from django.utils.html import format_html
+from .models import Page, Vacancy, Video
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
@@ -35,3 +36,20 @@ class VacancyAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'created_at')
     readonly_fields = ('created_at', 'updated_at')
     ordering = ('-created_at',)
+
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ("title", "video_link", "created_at")
+    readonly_fields = ("video_link",)
+
+    def video_link(self, obj):
+        if obj.file:
+            return format_html(
+                '<a href="{}" target="_blank">{}</a>',
+                obj.file.url,
+                obj.file.url
+            )
+        return "—"
+
+    video_link.short_description = "URL видео"
