@@ -1,6 +1,11 @@
 from django.db import models
 from tinymce.models import HTMLField
 from django.urls import reverse
+import subprocess
+import os
+import uuid
+from django.core.files import File
+
 
 class Page(models.Model):
     PAGE_TYPES = [
@@ -66,8 +71,45 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def url(self):
-        if self.file:
-            return self.file.url
-        return ""
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # сначала сохранить оригинал
+
+        if not self.file:
+            return
+
+        input_path = self.file.path
+
+        # уже оптимизирован — пропускаем
+        if "_optimized" in input_path:
+            return
+
+        output_name = f"{uuid.uuid4()}_optimized.mp4"
+        output_path = os.path.join(os.path.dirname(input_path), output_name)
+
+        cmd = [
+            "ffmpeg",
+            "-y",
+            "-i", input_path,
+
+            # 🔥 сжатие + оптимизация
+            "-vcodec", "libx264",
+            "-preset", "veryfast",
+            "-crf", "23",
+            "-movflags", "+faststart",
+
+            "-acodec", "aac",
+            "-b:a", "128k",
+
+            output_path
+        ]
+
+        subprocess.run(cmd, check=True)
+
+        # заменить файл на оптимизированный
+        with open(output_path, "rb") as f:
+            self.file.save(output_name, File(f), save=False)
+
+        os.remove(input_path)
+        os.remove(output_path)
+
+        super().save(update_fields=["file"])
