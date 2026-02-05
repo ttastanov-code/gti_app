@@ -2,50 +2,79 @@
 {% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
-    <div class="max-w-4xl mx-auto py-16 px-4">
+        <div class="max-w-4xl mx-auto py-16 px-4">
 
-    {% if user.is_authenticated %}
-    <div class="flex justify-end mb-6">
-        <a href="{% url 'info:page_edit' page.pk %}"
-        class="btn btn-outline btn-sm gap-2">
-        <!-- pencil-square -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.313l-4.5 1.125
-                    1.125-4.5L16.862 3.487z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M19.5 12v6.75A2.25 2.25 0 0117.25 21H5.25A2.25 2.25 0 013 18.75V6.75
-                    A2.25 2.25 0 015.25 4.5H12"/>
-        </svg>
-        Редактировать
-        </a>
-    </div>
-    {% endif %}
+        {% if user.is_authenticated %}
+        <div class="flex justify-end mb-6">
+            <a href="{% url 'info:page_edit' page.pk %}"
+            class="btn btn-outline btn-sm gap-2">
+            <!-- pencil-square -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.313l-4.5 1.125
+                        1.125-4.5L16.862 3.487z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19.5 12v6.75A2.25 2.25 0 0117.25 21H5.25A2.25 2.25 0 013 18.75V6.75
+                        A2.25 2.25 0 015.25 4.5H12"/>
+            </svg>
+            Редактировать
+            </a>
+        </div>
+        {% endif %}
 
-    <h1 class="text-4xl font-bold mb-8">
-        {{ page.title }}
-    </h1>
+        <h1 class="text-4xl font-bold mb-8">
+            {{ page.title }}
+        </h1>
 
-    <div class="prose prose-lg max-w-none
-            [&_.card]:flex-col
-            [&_.card]:lg:flex-row
-            [&_.card]:w-full
-            [&_.stats]:w-full
-            [&_.timeline]:overflow-x-auto
+        <div class="tinymce-content prose prose-lg max-w-none
+
+            /* ========== БАЗА ========== */
+            [&>*]:max-w-full
+            [&_*]:break-words
+
+            /* ========== МЕДИА ========== */
             [&_img]:!max-w-full [&_img]:!h-auto
-            [&_img]:max-w-full [&_img]:h-auto
-            [&_video]:max-w-full
-            [&_iframe]:max-w-full
-            [&_table]:block [&_table]:overflow-x-auto
+            [&_video]:!max-w-full [&_video]:h-auto
+            [&_iframe]:!max-w-full
+            [&_svg]:max-w-full
+
+            /* ========== ТАБЛИЦЫ / PRE ========== */
+            [&_table]:block [&_table]:overflow-x-auto [&_table]:w-full
+            [&_pre]:overflow-x-auto
+
+            /* ========== FLEX / GRID ЗАЩИТА ========== */
+            [&_.flex]:flex-wrap
+            [&_.grid]:w-full
+            [&_.grid]:overflow-x-auto
+
+            /* ========== DaisyUI card ========== */
+            [&_.card]:!flex-col
+            [&_.card]:w-full
+            lg:[&_.card]:!flex-row
+
+            /* ========== stats ========== */
+            [&_.stats]:w-full
+            [&_.stats]:overflow-x-auto
+
+            /* ========== timeline ========== */
+            [&_.timeline]:overflow-x-auto
+
+            /* ========== ТИПОГРАФИКА ========== */
             [&_ul]:list-disc [&_ul]:ml-6
             [&_ol]:list-decimal [&_ol]:ml-6
             [&_li]:mb-1
-            [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500
+
+            [&_blockquote]:border-l-4
+            [&_blockquote]:pl-4
+            [&_blockquote]:italic
+            [&_blockquote]:text-gray-500
+
             [&_h2]:mt-8 [&_h2]:mb-4
-            [&_h3]:mt-6 [&_h3]:mb-3">
-        {{ page.content|safe }}
-    </div>
+            [&_h3]:mt-6 [&_h3]:mb-3
+        ">
+            {{ page.content|safe }}
+        </div>
 
     </div>
 {% endblock %}
