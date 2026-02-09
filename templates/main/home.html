@@ -439,9 +439,17 @@
   <div class="md:col-span-3 card overflow-hidden">
     <div class="card-body">
 
-      <div class="space-y-6">
+      <div class="space-y-0 md:space-y-6">
+
         {% for block in blocks %}
-        <div class="p-6 rounded-xl bg-black text-neutral-content hover:bg-black transition overflow-hidden">
+        <div class="
+                  w-full
+                  bg-black text-neutral-content overflow-hidden transition
+                  px-4 py-6
+                  md:p-6
+                  md:rounded-xl
+                ">
+
           <h3 class="text-xl font-semibold mb-2">
             {{ block.title }}
             {% if user.is_authenticated %}
