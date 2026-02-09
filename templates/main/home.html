@@ -4,17 +4,152 @@
 {% block title %}Guidejet TI{% endblock %}
 
 {% block content %}
+<section class="relative min-h-screen w-full bg-black">
 
-<!-- HERO -->
-<div class="hero bg-black text-neutral-content min-h-screen px-4">
-  <div class="hero-content flex-col lg:flex-row-reverse gap-4 lg:gap-12">
+  <!-- VIDEO -->
+  <video
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay
+    loop
+    muted
+    playsinline
+  >
+    <source src="https://guidejet.kz/media/videos/27c8ef03-c6d5-4ff6-88d4-f2012ec8e728_cut.mp4" type="video/mp4">
+  </video>
 
-    <img
-      src="{% static 'hero_black.png' %}"
-      class="w-full max-w-[200px] sm:max-w-xs lg:max-w-sm rounded-lg shadow-2xl"
-    />
+  <!-- APPLE LIGHT GRADIENT -->
+  <div class="absolute inset-0 bg-gradient-to-t
+              from-black/100
+              via-black/50
+              to-black/10">
+  </div>
 
-    <div class="max-w-xl">
+  <!-- CONTENT -->
+  <div class="relative z-10 min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-6 w-full">
+
+      <div class="max-w-3xl space-y-8 sm:space-y-10 text-neutral-content">
+
+        <p class="uppercase tracking-[0.4em] text-xs opacity-60 py-5 sm:py-0">
+          Guidejet TI: Engineering Solutions
+        </p>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-semibold leading-[1.08] tracking-tight">
+          Собственное производство<br>
+          электроники
+        </h1>
+
+        <p class="text-base sm:text-lg lg:text-xl opacity-80 max-w-2xl">
+          Полный цикл разработки устройств —
+          от инженерной идеи и прототипа
+          до серийного производства и внедрения
+          в городскую транспортную инфраструктуру.
+        </p>
+
+        <!-- PRODUCT DIRECTIONS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+
+          <!-- POS -->
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-white/80">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="1.5"/>
+                <line x1="2" y1="10" x2="22" y2="10" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium">Транспортные POS-терминалы</p>
+              <p class="text-xs text-white/60 leading-relaxed">
+                Сертифицированные устройства оплаты проезда,
+                интегрированные с банковскими и муниципальными системами.
+              </p>
+            </div>
+          </div>
+
+          <!-- LED -->
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-white/80">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                <rect x="3" y="4" width="18" height="12" rx="2" stroke-width="1.5"/>
+                <line x1="8" y1="20" x2="16" y2="20" stroke-width="1.5"/>
+                <line x1="12" y1="16" x2="12" y2="20" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium">Информационные LED-табло</p>
+              <p class="text-xs text-white/60 leading-relaxed">
+                Уличные дисплеи для остановочных комплексов
+                с динамическим отображением маршрутов и времени прибытия.
+              </p>
+            </div>
+          </div>
+
+          <!-- GPS -->
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-white/80">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-width="1.5"
+                      d="M12 21s6-5.33 6-10a6 6 0 10-12 0c0 4.67 6 10 6 10z"/>
+                <circle cx="12" cy="11" r="2.5" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium">GPS-бортовые устройства</p>
+              <p class="text-xs text-white/60 leading-relaxed">
+                Телематические модули для мониторинга движения,
+                контроля маршрутов и сбора эксплуатационных данных.
+              </p>
+            </div>
+          </div>
+
+          <!-- SYSTEM -->
+          <div class="flex items-start gap-3">
+            <div class="mt-1 text-white/80">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                   viewBox="0 0 24 24" stroke="currentColor">
+                <rect x="3" y="4" width="18" height="6" rx="2" stroke-width="1.5"/>
+                <rect x="3" y="14" width="18" height="6" rx="2" stroke-width="1.5"/>
+                <circle cx="7" cy="7" r="1"/>
+                <circle cx="7" cy="17" r="1"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium">Система управления транспортом</p>
+              <p class="text-xs text-white/60 leading-relaxed">
+                Программно-аппаратная платформа
+                для диспетчеризации, аналитики и управления городской мобильностью.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="bg-black text-neutral-content py-20 sm:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+      <!-- IMAGE -->
+      <div class="flex justify-center lg:justify-start">
+        <img
+          src="{% static 'hero_black.png' %}"
+          class="w-full max-w-[220px] sm:max-w-xs lg:max-w-sm
+                 rounded-2xl shadow-2xl"
+        />
+      </div>
+
+      <!-- TEXT -->
+      <div class="max-w-xl space-y-6">
+
+        <!-- ⛔ ФОРМУЛУ НЕ ЛОМАЕМ -->
         <h1 class="font-bold
                   text-base sm:text-base lg:text-3xl
                   leading-snug">
@@ -31,24 +166,34 @@
           </span>
         </h1>
 
-      <p class="py-2 text-sm sm:text-base text-neutral-content/80">
-        Мы создаём умные города, разрабатывая IT системы и электронные устройства,
-        которые делают город удобным, прозрачным и современным.
-      </p>
+        <p class="text-sm sm:text-base opacity-80 leading-relaxed">
+          Мы создаём умные города, разрабатывая IT-системы
+          и электронные устройства, которые делают город
+          удобным, прозрачным и технологичным.
+        </p>
 
-      <p class="py-2 text-sm sm:text-base text-neutral-content/80">
-        Наши решения помогают городам Казахстана эффективно управлять
-        общественным транспортом и улучшать работу инфраструктуры.
-      </p>
+        <p class="text-sm sm:text-base opacity-80 leading-relaxed">
+          Наши решения помогают городам Казахстана эффективно управлять
+          общественным транспортом и городской инфраструктурой.
+        </p>
 
-      <a href="{% url 'project:list' %}">
-        <button class="btn btn-primary btn-sm sm:btn-md mt-4">
-          Наши проекты
-        </button>
-      </a>
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+          <a href="{% url 'info:page' 'cooperation' %}"
+             class="btn btn-primary px-8 font-medium">
+            Для сотрудничества
+          </a>
+          <a href="{% url 'request:form' %}"
+             class="btn btn-outline btn-white px-8 font-medium">
+            Связаться
+          </a>
+        </div>
+
+      </div>
     </div>
+
   </div>
-</div>
+</section>
 
 <!-- CONTENT GRID -->
 <div class="grid gap-3 md:gap-6 max-w-7xl mx-auto py-4 md:py-12 grid-cols-1 md:grid-cols-3">
