@@ -202,7 +202,7 @@
 
   <!-- ARTICLES -->
   <div class="md:col-span-1 bg-base-300 md:bg-base-100 shadow-none md:shadow-xl rounded-none md:rounded-xl">
-    <div class="p-2 md:p-6">
+    <div class="p-2 md:p-6 flex flex-col h-full">
       <h2 class="text-xl md:text-2xl font-bold mb-3">Последние статьи</h2>
 
       <div class="space-y-3">
@@ -232,11 +232,12 @@
         {% endfor %}
       </div>
 
-      <div class="flex justify-end mt-3">
+      <div class="flex justify-end mt-auto pt-4">
         <a href="{% url 'article:list' %}" class="btn btn-outline btn-xs md:btn-sm">
           Все статьи →
         </a>
       </div>
+
     </div>
   </div>
 
@@ -254,7 +255,7 @@
                 opacity-0 group-hover:opacity-100 
                 transition duration-500"></div>
 
-    <div class="p-2 md:p-6 relative z-10">
+    <div class="p-2 md:p-6 relative z-10 flex flex-col h-full">
 
       <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">Проекты</h2>
 
@@ -291,7 +292,7 @@
         {% endfor %}
       </div>
 
-      <div class="flex justify-end mt-3">
+      <div class="flex justify-end mt-auto pt-4">
         <a href="{% url 'project:list' %}" class="btn btn-outline btn-xs md:btn-sm">
           Все проекты →
         </a>
