@@ -23,65 +23,41 @@
         </a>
     </div>
     {% endif %}
-{% comment %} 
-    <h1 class="text-4xl font-bold text-center">
-        {{ page.title }}
-    </h1> {% endcomment %}
 
 </div>
 
-<!-- ===== ОСНОВНОЙ КОНТЕНТ (ГИБКИЙ, НО БЕЗ ПОЛОМКИ TINYMCE) ===== -->
-<div class="w-full">
-
-    <div class="tinymce-content prose prose-lg max-w-none
-
-        /* ========== БАЗА ========== */
+<!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+<div class="w-full overflow-x-hidden">
+    <div class="tinymce-content
         [&>*]:max-w-full
         [&_*]:break-words
-
-        /* ========== МЕДИА ========== */
         [&_img]:!max-w-full [&_img]:!h-auto
         [&_video]:!max-w-full [&_video]:h-auto
         [&_iframe]:!max-w-full
         [&_svg]:max-w-full
-
-        /* ========== ТАБЛИЦЫ / PRE ========== */
         [&_table]:block [&_table]:overflow-x-auto [&_table]:w-full
         [&_pre]:overflow-x-auto
-
-        /* ========== FLEX / GRID ЗАЩИТА ========== */
         [&_.flex]:flex-wrap
         [&_.grid]:w-full
         [&_.grid]:overflow-visible
-
-        /* ========== DaisyUI card ========== */
         [&_.card]:!flex-col
         [&_.card]:w-full
         lg:[&_.card]:!flex-row
-
-        /* ========== stats ========== */
         [&_.stats]:w-full
         [&_.stats]:overflow-x-auto
-
-        /* ========== timeline ========== */
         [&_.timeline]:overflow-x-auto
-
-        /* ========== ТИПОГРАФИКА ========== */
         [&_ul]:list-disc [&_ul]:ml-6
         [&_ol]:list-decimal [&_ol]:ml-6
         [&_li]:mb-1
-
         [&_blockquote]:border-l-4
         [&_blockquote]:pl-4
         [&_blockquote]:italic
         [&_blockquote]:text-gray-500
-
         [&_h2]:mt-8 [&_h2]:mb-4
         [&_h3]:mt-6 [&_h3]:mb-3
     ">
         {{ page.content|safe }}
     </div>
-
 </div>
 
 {% endblock %}
